@@ -38,18 +38,15 @@ fun main() {
                     println("The array does not contain $searchInt")
                 }
             }
-        }
-    }
-}
-
-fun getIntArray(): IntArray{
-    var intArray = intArrayOf()
-    while (true){
-        intArray += getUserInput("int") as Int
-        println("continue? (y/n)")
-        val continueBoolean = getUserInput("continue") as Boolean
-        if(!continueBoolean) {
-            return intArray
+            4 -> {
+                println("Please enter any number of integers that you want to reverse:")
+                val intArray = getIntArray()
+                val reversedIntArray = reverse(intArray)
+                println(intArray.contentToString() + " reversed is " + reversedIntArray.contentToString())
+            }
+            else -> {
+                println("Invalid option")
+            }
         }
     }
 }
@@ -76,7 +73,7 @@ fun ceaserCipher(uncodedString: String, shiftValue: Int): String {
 
 fun arrayAvg(numericArray: IntArray): Int {
     var arrayAverage = 0
-    for (i in numericArray){
+    for (i in numericArray) {
         arrayAverage += i
     }
     arrayAverage /= numericArray.size
@@ -85,7 +82,7 @@ fun arrayAvg(numericArray: IntArray): Int {
 
 fun arrayContains(intArray: IntArray, searchInt: Int): Boolean{
     for(i in intArray) {
-        if(i == searchInt){
+        if(i == searchInt) {
             return true
         }
     }
@@ -101,6 +98,20 @@ fun reverse(intArray: IntArray): IntArray{
     return reversedArray
 }
 
+fun getIntArray(): IntArray{
+    var intArray = intArrayOf()
+    while (true){
+        intArray += getUserInput("int") as Int
+        println("continue? (y/n)")
+        val continueBoolean = getUserInput("continue") as Boolean
+        if(!continueBoolean) {
+            return intArray
+        } else {
+            println("enter another integer:")
+        }
+    }
+}
+
 fun getUserInput(outputType: String): Any{
     var userInput = readln()
     while (true) {
@@ -110,6 +121,7 @@ fun getUserInput(outputType: String): Any{
                     return userInput.toInt()
                 } catch (exception: NumberFormatException) {
                     println("please enter an integer")
+                    userInput = readln()
                 }
             }
             "string" -> {
@@ -122,6 +134,7 @@ fun getUserInput(outputType: String): Any{
                     return false
                 } else {
                     println("please enter y or n")
+                    userInput = readln()
                 }
             }
         }
