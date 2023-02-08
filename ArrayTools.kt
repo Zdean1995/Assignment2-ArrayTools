@@ -30,6 +30,13 @@ fun main() {
                 val intArray = getIntArray()
                 println("Please enter the integer that you want to search for:")
                 val searchInt = getUserInput("int") as Int
+                val doesContain = arrayContains(intArray, searchInt)
+                if(doesContain) {
+                    println("The array does contain $searchInt")
+                }
+                else {
+                    println("The array does not contain $searchInt")
+                }
             }
         }
     }
@@ -49,7 +56,21 @@ fun getIntArray(): IntArray{
 
 fun ceaserCipher(uncodedString: String, shiftValue: Int): String {
     var codedString = ""
-
+    for(char in uncodedString) {
+        val charInt = char.code
+        if(charInt in 48..57) {
+            codedString += (((charInt - 48 + shiftValue) % 10) + 48).toChar()
+        }
+        else if (charInt in 65..90){
+            codedString += (((charInt - 65 + shiftValue) % 26) + 65).toChar()
+        }
+        else if (charInt in 97..122) {
+            codedString += (((charInt - 97 + shiftValue) % 26) + 97).toChar()
+        }
+        else {
+            codedString += charInt.toChar()
+        }
+    }
     return codedString
 }
 
